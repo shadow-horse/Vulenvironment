@@ -11,6 +11,8 @@ import com.sun.org.apache.xalan.internal.xsltc.TransletException;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
 import com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
 import com.sun.org.apache.xml.internal.serializer.SerializationHandler;
+
+//需要继承AbstractTranslet，否则反序列换会失败
 public class Calc extends AbstractTranslet{
 
 	public Calc()

