@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>DOM XSS验证</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<script th:inline="javascript">
+	var name = [[${xname}]];
+	console.log(name);
+</script>
+<body>
+    <p th:utext="'Hello, ' + ${xname} + '!'" />
+    <p></p >
+    
+</body>
+</html>

