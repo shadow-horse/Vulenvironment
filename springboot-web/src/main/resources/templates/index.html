@@ -6,11 +6,66 @@
 </head>
 <script th:inline="javascript">
 	var name = [[${xname}]];
-	console.log(name);
+	//初始化变量
+	var domxss1 = [[${domxss1}]]
+	var domxss2 = [[${domxss2}]]
+	var domxss3 = [[${domxss3}]]
+	var domxss4 = [[${domxss4}]]
+	console.log(domxss1)
+	console.log(domxss2)
+	console.log(domxss3)
+	console.log(domxss4)
+	
+	//document.write dom xss样例
+	if(domxss1 != null){
+		document.write("<P>1. document.write直接输出内容（实体）</p>");
+		document.write("<P>"+domxss1 + "</p>");
+		document.write("<P>2. document.write直接输出内容（属性）</p>");
+		document.write("<a href=\"" +domxss1 + "\">超链接</a>");
+	}
+	
+	//innerhtml dom xss样例
+	if(domxss2 != null){
+		window.onload = function()
+		{
+			document.getElementById("domxss2").innerHTML="<p>"+domxss2+"</p>";
+		}
+	}
+	
+	
+	
 </script>
 <body>
-    <p th:utext="'Hello, ' + ${xname} + '!'" />
-    <p></p >
+	<p>2. innerhtml直接输出</p>
+    <div id="domxss2">
     
+    </div>
+    <p>3. location/location.href/location.replace/iframe.src导致的dom xss</p>
+    <script th:inline="javascript">
+		var domxss3 = [[${domxss3}]];
+		if(domxss3 != ""){
+			location.href=domxss3;
+		}
+	</script>
+    <P>4. 使用setTimeout/setInterval/eval造成的XSS</P>
+    <input id="domxss4" value="label"></input>
+    </div>
+    <script th:inline="javascript">
+		var domxss4 = [[${domxss4}]];
+		function showText(text){
+			document.getElementById("domxss4").value=text;
+		}
+		if(domxss4 != ""){
+			//');alert(0);('
+			setTimeout("showText('"+domxss4+"')",2000);
+		}
+	</script>
+	
+    <br/>
+    <P>提交的原始内容如下：</P>
+    <p th:text="'domxss1:'+${domxss1}"/> <br/>
+    <p th:text="'domxss2:'+${domxss2}" /> <br/>
+    <p th:text="'domxss3:'+${domxss3}" /> <br/>
+    <p th:text="'domxss4:'+${domxss4}" /> <br/>
 </body>
 </html>
