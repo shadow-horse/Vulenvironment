@@ -11,10 +11,7 @@
 	var domxss2 = [[${domxss2}]]
 	var domxss3 = [[${domxss3}]]
 	var domxss4 = [[${domxss4}]]
-	console.log(domxss1)
-	console.log(domxss2)
-	console.log(domxss3)
-	console.log(domxss4)
+	
 	
 	//document.write dom xss样例
 	if(domxss1 != null){
@@ -36,6 +33,7 @@
 	
 </script>
 <body>
+	
 	<p>2. innerhtml直接输出</p>
     <div id="domxss2">
     
@@ -61,11 +59,50 @@
 		}
 	</script>
 	
+	<div id="adduser">
+	<form action="adduser" method="get">
+ 		<p>First name: <input type="text" name="username" /></p>
+  		<p>Last name: <input type="text" name="password" /></p>
+  		<input type="submit" value="Submit" />
+	</form>
+	</div>
     <br/>
+    <br/>
+    <br/>
+    <!-- 
     <P>提交的原始内容如下：</P>
-    <p th:text="'domxss1:'+${domxss1}"/> <br/>
-    <p th:text="'domxss2:'+${domxss2}" /> <br/>
-    <p th:text="'domxss3:'+${domxss3}" /> <br/>
-    <p th:text="'domxss4:'+${domxss4}" /> <br/>
+    <p th:text="'domxss1:'+${domxss1}"/> 
+    <p th:text="'domxss2:'+${domxss2}" /> 
+    <p th:text="'domxss3:'+${domxss3}" /> 
+    <p th:text="'domxss4:'+${domxss4}" /> 
+     -->
+     
+     <!-- 页面异步Ajax请求 -->
+     <div id="welcome">
+     </div>
+     <script type="text/javascript">
+    	window.onload=function()
+    	{
+    		var request = new XMLHttpRequest();
+    		var url = window.location.href;
+    		if(url.indexOf("?") != -1){
+    			url = url.substr(0,url.indexOf("?"))
+    		}
+    		if(url.lastIndexOf("/") != -1){
+    			url = url.substr(0,url.lastIndexOf("/"))
+    		}
+    		url = url + "/getinfo";
+    		var method = "GET";
+    		request.open(method,url);
+    		request.send("user=tester");
+    		request.onreadystatechange=function(){
+    			if(request.readyState == 4){
+    				if(request.status == 200){
+    					document.getElementById("welcome").innerHTML="<p>" + request.responseText + "</p>";
+    				}
+    			}
+    		}
+    	}
+     </script>
 </body>
 </html>

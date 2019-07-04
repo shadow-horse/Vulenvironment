@@ -18,7 +18,7 @@ import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import com.sun.rowset.JdbcRowSetImpl;
 
 @RestController
-@RequestMapping("/web")
+@RequestMapping("/")
 public class WebController {
 	
 	@RequestMapping("welcome")
@@ -83,4 +83,6 @@ public class WebController {
         JSONObject.parse(payload2);
 		return user;
 	}
+	
+	
 }

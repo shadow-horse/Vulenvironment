@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>添加用户</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<table border="1">
+	<tr>
+		<td>username:</td>
+		<td>
+		<script th:inline="javascript">
+			var name = [[${username}]];
+			document.write(name);
+		</script>
+		</td>
+	</tr>
+	<tr>
+		<td>password:</td>
+		<td>
+		<script th:inline="javascript">
+			var name = [[${password}]];
+			document.write(name);
+		</script>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

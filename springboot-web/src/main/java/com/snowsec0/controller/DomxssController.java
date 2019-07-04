@@ -26,4 +26,16 @@ public class DomxssController {
         return "index";
     }
 	
+	@RequestMapping("/adduser")
+	public String submit(
+			@RequestParam(name = "username", required = false, defaultValue = "admin") String username,
+			@RequestParam(name = "password", required = false, defaultValue = "password") String password,
+			Model model
+			)
+	{
+		model.addAttribute("username",username);
+		model.addAttribute("password",password);
+		return "success";
+	}
+	
 }
