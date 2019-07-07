@@ -3,11 +3,14 @@ package com.snowsec0.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -57,15 +60,16 @@ public class DomxssController {
         return "index";
     }
 	
-	@RequestMapping("/adduser")
+	@PostMapping("/adduser")
 	public String submit(
-			@RequestParam(name = "username", required = false, defaultValue = "admin") String username,
-			@RequestParam(name = "password", required = false, defaultValue = "password") String password,
-			Model model
-			)
+			@RequestParam(name = "username", required = false, defaultValue = "world") String username,
+			@RequestParam(name = "password", required = false, defaultValue = "") String password,
+			Model model)
 	{
 		model.addAttribute("username",username);
 		model.addAttribute("password",password);
+		System.out.println(username);
+		System.out.println(password);
 		return "success";
 	}
 	

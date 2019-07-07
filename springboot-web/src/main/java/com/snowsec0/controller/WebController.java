@@ -65,7 +65,7 @@ public class WebController {
 	//基于 TemplateImpl 的 PoC
 	//{\"@type\":\"com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl\",\"_bytecodes\":[\"base64_calss\"],\"_name\":\"a.b\",\"_tfactory\":{ },\"_outputProperties\":{ },\"_version\":\"1.0\",\"allowedProtocols\":\"all\"}
 	//通过postMan提交json格式数据
-	@PostMapping("adduser")
+	@PostMapping("addoneuser")
 	public Object adduser(@RequestBody Map<String,Object> map){
 	//{"json":"{\"name\":\"snowsec0\",\"password\":\"hello world\"}"}
 		ParserConfig config = new ParserConfig();
