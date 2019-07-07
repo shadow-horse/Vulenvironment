@@ -110,13 +110,13 @@
     		}
     		
     		url = url + "?redirect=" + encodeURIComponent(document.getElementById("redirectinput").value);
-    		alert(url);
     		window.location.href = url;
     		
 		}
 		function redirect(){
 			var url = document.getElementById("redirectinput").value;
-			window.open(url);
+			//window.open(url);
+			window.location.href = url;
 		}
 	</script>
 	</div>
