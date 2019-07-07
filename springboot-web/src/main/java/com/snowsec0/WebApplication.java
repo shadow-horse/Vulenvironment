@@ -14,6 +14,7 @@ public class WebApplication extends WebMvcConfigurerAdapter{
 	}
 	
 	//springboot中URL带有斜杠的转义字符百分之2F导致的400错误
+	//https://blog.csdn.net/u011419453/article/details/25736375 未解决
 	@Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
         UrlPathHelper urlPathHelper = new UrlPathHelper();
