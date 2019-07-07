@@ -4,6 +4,7 @@
     <title>DOM XSS验证</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 <script th:inline="javascript">
 	var name = [[${xname}]];
 	//初始化变量
@@ -14,7 +15,7 @@
 	
 	
 	//document.write dom xss样例
-	if(domxss1 != null){
+	if(domxss1 != ""){
 		document.write("<P>1. document.write直接输出内容（实体）</p>");
 		document.write("<P>"+domxss1 + "</p>");
 		document.write("<P>2. document.write直接输出内容（属性）</p>");
@@ -22,18 +23,14 @@
 	}
 	
 	//innerhtml dom xss样例
-	if(domxss2 != null){
-		window.onload = function()
-		{
-			document.getElementById("domxss2").innerHTML="<p>"+domxss2+"</p>";
-		}
-	}
 	
+		
 	
 	
 </script>
 <body>
-	
+	<p>1. href链接 </p>
+	<a href="domxss/?domxss1=domxss1?" >domxss/?domxss1=domxss1</a>
 	<p>2. innerhtml直接输出</p>
     <div id="domxss2">
     
@@ -45,8 +42,13 @@
 			location.href=domxss3;
 		}
 	</script>
-    <P>4. 使用setTimeout/setInterval/eval造成的XSS</P>
-    <input id="domxss4" value="label"></input>
+	<div id="evaldom">
+    <P>4.1 使用setTimeout/setInterval/eval造成的XSS</P>
+    <input id = "domxss4input" value="default"><br/>
+    <input id="domxss4" value=""><br/>
+    <input type="submit" onclick="update()" value="update"><br/>
+    <P>4.2 使用eval造成的XSS</P>
+    <input type="submit" onclick="update2()" value="update2"><br/>
     </div>
     <script th:inline="javascript">
 		var domxss4 = [[${domxss4}]];
@@ -55,16 +57,68 @@
 		}
 		if(domxss4 != ""){
 			//');alert(0);('
-			setTimeout("showText('"+domxss4+"')",2000);
+			setTimeout("showText('"+domxss4+"')",1000);
+		}else{
+			setTimeout("showText('it is null.')",1000);
+		}
+		function update(){
+			
+    		$.ajax({
+    			url:"update",
+    			data:{domxss4:$("#domxss4input").val()},
+    			type:"GET",
+    			dataType : 'text',
+    			success:function(data){
+    				//setTimeout("showText('"+data+"')",1000);
+    				//setTimeout("showText('')console.log(12345678)('')",1000);
+    				var va = data.replace(/\"/g, "");
+    				eval("showText('"+va+"')");
+    			}
+    		});
+		}
+		function update2(){
+    		$.ajax({
+    			url:"update",
+    			data:{domxss4:$("#domxss4input").val()},
+    			type:"GET",
+    			dataType : 'text',
+    			success:function(data){
+    				var va = data.replace(/\"/g, "");
+    				window.location.href = 'domxss?domxss4='+encodeURI(va);
+    			}
+    		});
 		}
 	</script>
 	
 	<div id="adduser">
+	<p> 5. form表单提交</p>
 	<form action="adduser" method="get">
  		<p>First name: <input type="text" name="username" /></p>
   		<p>Last name: <input type="text" name="password" /></p>
   		<input type="submit" value="Submit" />
 	</form>
+	</div>
+	<div id="redirect">
+	<p>6. redirect页面跳转</p>
+	<input id="redirectinput" name="redirect" value=""><button onclick="confirmurls()">confirm</button><br/>
+	<button onclick="redirect()" >open new windows</button>
+	<script type="text/javascript">
+		function confirmurls(){
+			var url = window.location.href;
+    		if(url.indexOf("?") != -1){
+    			url = url.substr(0,url.indexOf("?"))
+    		}
+    		
+    		url = url + "?redirect=" + encodeURIComponent(document.getElementById("redirectinput").value);
+    		alert(url);
+    		window.location.href = url;
+    		
+		}
+		function redirect(){
+			var url = document.getElementById("redirectinput").value;
+			window.open(url);
+		}
+	</script>
 	</div>
     <br/>
     <br/>
@@ -80,9 +134,15 @@
      <!-- 页面异步Ajax请求 -->
      <div id="welcome">
      </div>
-     <script type="text/javascript">
-    	window.onload=function()
-    	{
+     <script th:inline="javascript">
+     	window.onload = function()
+		{
+			if(domxss2 != ""){
+				document.getElementById("domxss2").innerHTML="<p>"+domxss2+"</p>";
+			}
+			
+			document.getElementById("redirectinput").value = [[${redirect}]];
+     	
     		var request = new XMLHttpRequest();
     		var url = window.location.href;
     		if(url.indexOf("?") != -1){
@@ -98,11 +158,12 @@
     		request.onreadystatechange=function(){
     			if(request.readyState == 4){
     				if(request.status == 200){
-    					document.getElementById("welcome").innerHTML="<p>" + request.responseText + "</p>";
+    					document.getElementById("welcome").innerHTML="<p>7. 页面加载发起的ajax请求</p><p>" + request.responseText + "</p>";
     				}
     			}
     		}
     	}
      </script>
+        
 </body>
 </html>
