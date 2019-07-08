@@ -30,10 +30,10 @@
 </script>
 <body>
 	<p>1. href链接 </p>
-	<a href="domxss/?domxss1=domxss1?" >domxss/?domxss1=domxss1</a>
+	<a href="domxss?domxss1=domxss1?" >domxss?domxss1=domxss1</a>
 	<p>2. innerhtml直接输出</p>
     <div id="domxss2">
-    
+    <a href="domxss?domxss2=domxss2?" >domxss?domxss2=domxss2</a>
     </div>
     <p>3. location/location.href/location.replace/iframe.src导致的dom xss</p>
     <script th:inline="javascript">
@@ -42,6 +42,7 @@
 			location.href=domxss3;
 		}
 	</script>
+	<a href="domxss?domxss3=domxss3?" >domxss?domxss3=domxss3</a>
 	<div id="evaldom">
     <P>4.1 使用setTimeout/setInterval/eval造成的XSS</P>
     <input id = "domxss4input" value="default"><br/>
