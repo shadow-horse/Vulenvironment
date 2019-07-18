@@ -20,10 +20,18 @@
 	</properties>
 
 	<dependencies>
+	<!-- 1.2.24版本，自动开启auto type漏洞 -->
+	<!-- 
 		<dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.24</version>
+		</dependency>
+	 -->
+		 <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -71,5 +79,7 @@
     			</executions>
 			</plugin>
 		</plugins>
+		<!--  -->
+		<defaultGoal>compile</defaultGoal>
 	</build>
 </project>
