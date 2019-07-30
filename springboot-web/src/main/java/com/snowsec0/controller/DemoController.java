@@ -3,6 +3,8 @@ package com.snowsec0.controller;
 import java.util.Date;
 
 import com.snowsec0.dao.*;
+import com.snowsec0.jackson.JacksonSerial;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,4 +27,14 @@ public class DemoController {
        return demo;
     }
    
+    /**
+     * 触发Jackson漏洞
+     * cve-2019-12384
+     */
+    @RequestMapping("/jackson")
+    public String jackson() {
+    	JacksonSerial jacksonSerial = new JacksonSerial();
+    	jacksonSerial.cve201912384();
+    	return "jackson success";
+    }
 }
