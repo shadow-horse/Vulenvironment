@@ -1,2 +1,6 @@
 .DS_Store
 */.DS_Store
+solr/Server
+solr/solr-6.6.0
+
+
