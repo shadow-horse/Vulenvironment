@@ -43,7 +43,7 @@ Solr: solr 6.6.0  (5版本可以基于jdk1.7)
 #### 3）访问页面  
 http://127.0.0.1:8983/solr/index.html#/  
 
-![](www.baidu.com)
+![](https://github.com/shadow-horse/Vulenvironment/blob/master/solr/img/start.png)
 
 
 ### 3. 创建示例  
@@ -59,7 +59,7 @@ http://127.0.0.1:8983/solr/index.html#/
 
 在admin管理界面，选择创建的new_core工程。   
 
-![](www.baidu.com)
+![](https://github.com/shadow-horse/Vulenvironment/blob/master/solr/img/new_core.png)
 
 ### 4. 基于Tomcat部署Solr
 
