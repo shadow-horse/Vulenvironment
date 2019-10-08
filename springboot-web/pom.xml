@@ -88,11 +88,19 @@
     		<scope>compile</scope>
 		</dependency> 
 		<!-- CVE-2019-12086-jackson-databind 远程文件读取漏洞-->
+        <!--
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.13</version>
         </dependency>
+        -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.48</version>
+        </dependency>
+        
 	</dependencies>
 
 	<build>

