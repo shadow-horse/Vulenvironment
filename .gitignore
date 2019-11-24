@@ -3,4 +3,6 @@
 solr/Server
 solr/solr-6.6.0
 */.*
-
+solr/Servers/
+solr/solrhome/
+/.metadata/
