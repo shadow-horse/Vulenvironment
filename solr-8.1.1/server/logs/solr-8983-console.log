@@ -1,0 +1,14 @@
+Java HotSpot(TM) 64-Bit Server VM warning: -XX:+UseLargePages is disabled in this release.
+2019-11-20 17:11:52.370 INFO  (main) [   ] o.e.j.u.log Logging initialized @930ms to org.eclipse.jetty.util.log.Slf4jLog
+2019-11-20 17:11:52.512 WARN  (main) [   ] o.e.j.s.AbstractConnector Ignoring deprecated socket close linger time
+2019-11-20 17:11:52.516 INFO  (main) [   ] o.e.j.s.Server jetty-9.4.14.v20181114; built: 2018-11-14T21:20:31.478Z; git: c4550056e785fb5665914545889f21dc136ad9e6; jvm 1.8.0_171-b11
+2019-11-20 17:11:52.536 INFO  (main) [   ] o.e.j.d.p.ScanningAppProvider Deployment monitor [file:///Users/snow/Files/Git/Vulenvironment/solr-8.1.1/server/contexts/] at interval 0
+2019-11-20 17:11:52.803 INFO  (main) [   ] o.e.j.w.StandardDescriptorProcessor NO JSP Support for /solr, did not find org.apache.jasper.servlet.JspServlet
+2019-11-20 17:11:52.814 INFO  (main) [   ] o.e.j.s.session DefaultSessionIdManager workerName=node0
+2019-11-20 17:11:52.814 INFO  (main) [   ] o.e.j.s.session No SessionScavenger set, using defaults
+2019-11-20 17:11:52.815 INFO  (main) [   ] o.e.j.s.session node0 Scavenging every 660000ms
+2019-11-20 17:11:52.883 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter Using logger factory org.apache.logging.slf4j.Log4jLoggerFactory
+2019-11-20 17:11:52.887 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter  ___      _       Welcome to Apache Solr™ version 8.1.1
+2019-11-20 17:11:52.887 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter / __| ___| |_ _   Starting in standalone mode on port 8983
+2019-11-20 17:11:52.887 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter \__ \/ _ \ | '_|  Install dir: /Users/snow/Files/Git/Vulenvironment/solr-8.1.1
+2019-11-20 17:11:52.887 INFO  (main) [   ] o.a.s.s.SolrDispatchFilter |___/\___/_|_|    Start time: 2019-11-20T17:11:52.887Z
