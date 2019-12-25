@@ -1,3 +1,4 @@
+package com.snowsec0.mbean;
 
 import java.lang.management.ManagementFactory;
 import javax.management.*;
