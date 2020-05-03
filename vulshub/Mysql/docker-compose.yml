@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  #公共开放mysql数据库，供所有项目使用
+  mysql:
+    image: mariadb:10.1
+    environment:
+      MYSQL_ROOT_PASSWORD: "root!@#"
+      MYSQL_DATABASE: "mysql"
+      MYSQL_USER: "mysql"
+      MYSQL_PASSWORD: "mysqlpwd"
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
+    driver: local
