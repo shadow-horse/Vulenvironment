@@ -1,9 +1,9 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
 MAINTAINER snowsec0 <snowsec0@gmail.com>
 ENV DEBIAN_FRONTEND=noninteractive
 #更新yum源
-#RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
-#COPY sources.list /etc/apt/
+RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
+COPY sources.list /etc/apt/
 #命令分开写可能存在问题，建议update和install合并一行运行
 RUN apt-get clean && apt-get -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update --fix-missing \
     && apt-get install -y apache2 \
