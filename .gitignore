@@ -8,3 +8,5 @@ solr/solrhome/
 /.metadata/
 *.log
 /.recommenders/
+.idea
+target/

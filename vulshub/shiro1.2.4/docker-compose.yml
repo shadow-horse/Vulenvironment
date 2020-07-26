@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  apache:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8080"
